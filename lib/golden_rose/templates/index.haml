@@ -1,0 +1,80 @@
+!!!
+%html
+  %head
+    %meta{:charset => "UTF-8"}
+    %title Tests results
+    %link{:href => "https://fonts.googleapis.com/css?family=Source+Sans+Pro&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
+    :css
+      body { font-family: 'Source Sans Pro', sans-serif; }
+      #container { max-width: 1170px; margin: auto;}
+      h1 {
+        color: #ff7726;
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 18px;
+        text-align: left;
+        margin: 73px 0 24px 0;
+      }
+      h2 {
+        color: #4e4e4e;
+        margin: 0 0 60px 0;
+        font-size: 18px;
+        line-height: 18px;
+      }
+      #results { margin-right: 34px; }
+      input[type=checkbox], input[type=checkbox] + ol > li { display: none; }                      
+      input[type=checkbox]:checked + ol > li { display: block; }
+      ol, li { position: relative; }
+      ol { margin: 0; padding: 0 0 0 34px; }
+      ol#tree { padding: 0; }
+      ol::before {
+        content: "▶";
+        position: absolute;
+        top: -35px; left: 15px;
+        font-size: 10px;
+        color: #ff7726;
+      }
+      ol#tree::before { display: none; }
+      input[type=checkbox]:checked + ol::before { content: "▼"; }
+      li { list-style: none; }
+      label { cursor: pointer; }
+      label, .last-node {
+        padding: 13.5px 0 13.5px 34px;
+        width: 100%;
+        display: block;
+        background: #f6f6f6;
+        border-bottom: 3px #fff solid;
+        color: #4e4e4e;
+        letter-spacing: -0.32px;
+        line-height: 18px;
+      }
+      .time, .failures-count {
+        float: right;
+        width: 90px;
+      }
+      .failures-count { color: #a80000; }
+      .success { 
+        background: #ccffcc; 
+        color: #005e37;
+        padding: 8.5px 0 8.5px 34px;
+        font-weight: 400;
+      }
+      .failure { 
+        background: #ffcfcf; 
+        color: #a80000;
+      }
+      .error-details {
+        clear: both;
+        display: block;
+        font-size: 14px;
+        letter-spacing: -0.28px;
+      }
+  %body
+    #container
+      %h1
+        = @details[:name]
+      %h2
+        = @details[:info]
+      #results
+        %ol#tree
+          = @rendered_list
