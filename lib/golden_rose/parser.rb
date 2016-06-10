@@ -13,27 +13,25 @@ module GoldenRose
     end
 
     def parse!
-      archive? ? open_zip! : open_directory!
+      archive? ? open_zip : open_directory
       raise GeneratingError, "File 'TestSummaries.plist' was not found in the folder." unless @plist_file_path
       @parsed_plist = Plist::parse_xml(@plist_file_path)
-      File.delete(@plist_file_path)
+      File.delete(@plist_file_path) if archive?
       raise GeneratingError, "Could not parse plist correctly." unless parsed_plist
+      parsed_plist
 
-      @parsed_plist
+    rescue Zip::Error, Errno::ENOENT
+      raise GeneratingError, "Could not open the folder."
     end
 
     private
 
-    def open_directory!
+    def open_directory
       dir = Dir.open(folder_path)
-      dir.each do |file|
-        @plist_file_path = File.join(folder_path, file) if test_summaries?(file)
-      end
-    rescue Errno::ENOENT
-      raise GeneratingError, "Could not open the folder."
+      dir.each { |file| @plist_file_path = File.join(folder_path, file) if test_summaries?(file) }
     end
 
-    def open_zip!
+    def open_zip
       Zip::File.open(folder_path) do |zip_file|
         zip_file.each do |entry|
           file_name = File.basename(entry.name)
@@ -44,8 +42,6 @@ module GoldenRose
           end
         end
       end
-    rescue Zip::Error
-      raise GeneratingError, "Could not open the folder."
     end
 
     def test_summaries?(file_name)
