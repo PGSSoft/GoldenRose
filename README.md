@@ -1,41 +1,56 @@
 # GoldenRose
 
-A tool for generating reports from plist files in easy to read form.
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/PGSSoft/goldenrose/blob/master/LICENSE)
+
+A tool for generating reports from Xcode results bundle.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'golden_rose'
+```bash
+sudo gem install goldenrose
 ```
 
-And then execute:
+## Quick start
 
-    $ bundle
+GoldenRose creates UI Automations tests results from "results" bundle created by the Xcode during execution.
 
-Or install it yourself as:
+- Run UI Tests and save results bundle by using `-resultBundlePath`:
 
-    $ gem install golden_rose
+```bash
+xcodebuild -workspace MyProject.xcworkspace \
+  -scheme MyApp \
+  -destination 'platform=iOS Simulator,name=iPad Air 2,OS=9.2' \
+  -resultBundlePath 'MyApp.test_result' test
+```
 
-## Usage
+- Generate reports with GoldenRose:
 
-    $ golden_rose generate FILE_PATH
+```bash
+goldenrose generate MyApp.test_result
+```
 
-This will genarate report in html format in gem's `output` directory.
+This will generate report in html format in current directory.
+
+## Features
+
+- [x] UI Automations tests
+- [x] Reading from ZIP files
+- [ ] Unit tests reports
+- [ ] Build logs
+- [ ] Code coverage
+- [ ] Fastlane integration
+- [ ] JUnit reports
+- [ ] And more
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+After checking out the repo, run `./bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/golden_rose.
+Bug reports and pull requests are welcome on GitHub at [https://github.com/PGSSoft/goldenrose](https://github.com/PGSSoft/goldenrose).
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
