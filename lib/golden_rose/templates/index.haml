@@ -26,19 +26,19 @@
       input[type=checkbox]:checked + ol > li { display: block; }
       ol, li { position: relative; }
       ol { margin: 0; padding: 0 0 0 34px; }
-      ol#tree { padding: 0; }
+      ol#collapsible { padding: 0; }
       ol::before {
         content: "▶";
         position: absolute;
-        top: -35px; left: 15px;
+        top: -33px; left: 15px;
         font-size: 10px;
         color: #ff7726;
       }
-      ol#tree::before { display: none; }
+      ol#collapsible::before { display: none; }
       input[type=checkbox]:checked + ol::before { content: "▼"; }
       li { list-style: none; }
       label { cursor: pointer; }
-      label, .last-node {
+      label, .success, .failure {
         padding: 13.5px 0 13.5px 34px;
         width: 100%;
         display: block;
@@ -63,11 +63,12 @@
         background: #ffcfcf; 
         color: #a80000;
       }
-      .error-details {
+      .failure-message, .failure-details {
         clear: both;
         display: block;
         font-size: 14px;
         letter-spacing: -0.28px;
+        margin-right: 34px;
       }
   %body
     #container
@@ -76,5 +77,26 @@
       %h2
         = @details[:info]
       #results
-        %ol#tree
-          = @rendered_list
+        %ol#collapsible
+          - @items.each do |item|
+            %li
+              %label(for="#{item[:node_id]}")
+                = item[:name]
+                - if item[:failures_count]
+                  %span.failures-count
+                    = "Failures: "
+                    = item[:failures_count]
+              %input(type="checkbox" id="#{item[:node_id]}")
+              %ol
+                - item[:subtests].each do |subtest|
+                  %li
+                    %span(class="#{subtest[:status]}")
+                      = subtest[:name]
+                      %span.time
+                        = subtest[:time]
+                      - if subtest[:failures]
+                        - subtest[:failures].each do |failure|
+                          .failure-message
+                            = failure[:message]
+                          .failure-details
+                            #{failure[:file_name]}:#{failure[:line_number]}

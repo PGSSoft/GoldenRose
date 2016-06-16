@@ -1,5 +1,5 @@
 require "golden_rose/version"
-require "golden_rose/result_item"
+require "golden_rose/subtest_item"
 require "golden_rose/parser"
 require "golden_rose/results_filterer"
 require "golden_rose/generators/html_format"

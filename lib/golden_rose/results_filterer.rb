@@ -1,9 +1,8 @@
 # This class is responsible for filtering results
-# for needed fields it and returning structure with ResultItems
+# to include only subtests with needed details
 
 module GoldenRose
   class ResultsFilterer
-    ALLOWED_FIELDS = %w(Tests Subtests ActivitySummaries SubActivities)
     attr_accessor :parsed_plist, :results
 
     def initialize(parsed_plist)
@@ -11,30 +10,39 @@ module GoldenRose
     end
 
     def filter!
-      raise GeneratingError, "Testable summaries not present."  unless testable_summaries
-      @results = Results.new(test_details, iterate(testable_summaries).first)
+      raise GeneratingError, "Testable summaries not present." unless testable_summaries
+      raise GeneratingError, "Tests not present." unless tests
+      @results = Results.new(test_details, items)
     end
 
-    def testable_summaries
-      parsed_plist['TestableSummaries']
-    end
+    private
 
-    def subtests
-      iterate(testable_summaries).first['Tests'].first['Subtests'].first
-    end
+    def iterate_subtests(items)
+      items.map.with_index do |subtest, i|
+        child_subtests = subtest["Subtests"]
+        next if child_subtests && child_subtests.empty?
 
-    def iterate(items, parent = nil)
-      collection = items.map do |source_item|
-        ResultItem.new.tap do |new_item|
-          new_item.parent = parent
-          new_item.copy_from(source_item)
-          source_item.each do |k, v|
-            next unless field_allowed?(k)
-            new_item.type = k
-            new_item[k] = iterate(v, new_item) if iterate(v, new_item).any?
-          end
+        SubtestItem.new.tap do |item|
+          item.subtest = subtest
+          item[:subtests] = iterate_subtests(child_subtests) if child_subtests
+          item.set_details
         end
-      end.select(&:required?)
+      end.reject(&:nil?)
+    end
+
+    def items
+      compact_results(iterate_subtests(tests)).flatten.compact
+    end
+
+    def compact_results(items)
+      items.map do |subtest|
+        subtests = subtest[:subtests]
+        if subtests.size > 1
+          subtests
+        elsif subtests.size == 1
+          compact_results(subtests)
+        end
+      end
     end
 
     def test_details
@@ -43,22 +51,12 @@ module GoldenRose
       }
     end
 
-    private
-
-    def field_allowed?(key)
-      ALLOWED_FIELDS.include?(key)
+    def testable_summaries
+      parsed_plist['TestableSummaries']
     end
 
-    def get_children(hash, keys)
-      key = keys.delete_at(0)
-
-      raise GeneratingError, "#{key} not present in plist structure." if hash[key].nil?
-
-      if keys.empty?
-        hash[key]
-      else
-        get_children(hash[key].first, keys)
-      end
+    def tests
+      testable_summaries.first['Tests']
     end
 
     class Results < Struct.new(:details, :items); end

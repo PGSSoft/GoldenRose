@@ -1,4 +1,5 @@
-# This class is responsible for parsing plist from zip file
+# This class is responsible for parsing plist
+# from zip file or folder
 
 require "plist"
 require "zip"
