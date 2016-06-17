@@ -1,13 +1,13 @@
 # GoldenRose
 
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/PGSSoft/goldenrose/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/PGSSoft/golden_rose/blob/master/LICENSE)
 
 A tool for generating reports from Xcode results bundle.
 
 ## Installation
 
 ```bash
-sudo gem install goldenrose
+sudo gem install golden_rose
 ```
 
 ## Quick start
@@ -26,7 +26,7 @@ xcodebuild -workspace MyProject.xcworkspace \
 - Generate reports with GoldenRose:
 
 ```bash
-goldenrose generate MyApp.test_result
+golden_rose generate MyApp.test_result
 ```
 
 This will generate report in html format in current directory.
@@ -48,7 +48,7 @@ After checking out the repo, run `./bin/setup` to install dependencies. Then, ru
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/PGSSoft/goldenrose](https://github.com/PGSSoft/goldenrose).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/PGSSoft/golden_rose](https://github.com/PGSSoft/golden_rose).
 
 
 ## License
