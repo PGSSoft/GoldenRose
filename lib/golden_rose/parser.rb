@@ -29,18 +29,20 @@ module GoldenRose
 
     def open_directory
       dir = Dir.open(folder_path)
-      dir.each { |file| @plist_file_path = File.join(folder_path, file) if test_summaries?(file) }
+      file = dir.find { |file| test_summaries?(file) }
+      @plist_file_path = File.join(folder_path, file)
     end
 
     def open_zip
       Zip::File.open(folder_path) do |zip_file|
-        zip_file.each do |entry|
+        entry = zip_file.find do |entry|
           file_name = File.basename(entry.name)
-          if test_summaries?(file_name)
-            uuid = ::SecureRandom.uuid
-            @plist_file_path = File.join(GoldenRose::root, "/source_#{uuid}.plist")
-            entry.extract(@plist_file_path)
-          end
+          test_summaries?(file_name)
+        end
+        if entry
+          uuid = ::SecureRandom.uuid
+          @plist_file_path = File.join(GoldenRose::root, "/source_#{uuid}.plist")
+          entry.extract(@plist_file_path)
         end
       end
     end

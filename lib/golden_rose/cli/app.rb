@@ -1,5 +1,4 @@
 require "thor"
-require "rainbow"
 
 module GoldenRose
   module CLI
@@ -8,13 +7,13 @@ module GoldenRose
       method_option :output, type: :string, aliases: "-o"
 
       def generate(folder_path)
-        puts "Started formatting report..."
+        say("Started formatting report...")
         GoldenRose::generate(folder_path, options[:output])
-        puts Rainbow("Report generated in #{options[:output] || Dir.pwd}/index.html").green
+        say("Report generated in #{options[:output] || Dir.pwd}/index.html", :green)
       rescue GoldenRose::GeneratingError => e
-        puts puts Rainbow(e.message).yellow
+        say(e.message, :yellow)
       rescue StandardError => e
-        puts Rainbow("Error during running generator: #{e.message}").red
+        say("Error during running generator.", :red)
       end
     end
   end

@@ -27,7 +27,7 @@ module GoldenRose
           item[:subtests] = iterate_subtests(child_subtests) if child_subtests
           item.set_details
         end
-      end.reject(&:nil?)
+      end.compact
     end
 
     def items

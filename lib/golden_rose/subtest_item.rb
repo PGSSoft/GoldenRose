@@ -15,7 +15,7 @@ module GoldenRose
       return if has_child_subtests?
 
       self[:failures_count] = failed_subtests.size if failed_subtests?
-      self[:node_id] = "node_#{object_id}"
+      self[:node_id] = node_id
     end
 
     def set_child_details
@@ -58,6 +58,10 @@ module GoldenRose
 
     def failed_subtests?
       failed_subtests.size > 0
+    end
+
+    def node_id
+      "node_#{object_id}"
     end
   end
 end
