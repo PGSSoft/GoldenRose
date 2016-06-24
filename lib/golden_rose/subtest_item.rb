@@ -1,4 +1,5 @@
 # Used for setting single subtest details
+# Should be refactored to not inherit from Hash
 
 module GoldenRose
   class SubtestItem < Hash
