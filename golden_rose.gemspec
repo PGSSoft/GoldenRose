@@ -9,9 +9,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Róża Szylar (PGS Software)"]
   spec.email         = ["rszylar@pgs-soft.com"]
 
-  spec.summary       = %q{A tool for generating reports from plist files in easy to read form.}
-  spec.description   = %q{A tool for generating reports from plist files in easy to read form.}
-  spec.homepage      = ""
+  spec.summary       = %q{A tool for generating reports from Xcode results bundle.}
+  spec.description   = %q{A tool for generating reports from Xcode results bundle.
+  Analyze results bundle directory created by Xcode during building, testing, running and generates HTML report with results.}
+  spec.homepage      = "https://github.com/PGSSoft/golden_rose"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
