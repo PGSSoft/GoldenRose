@@ -12,7 +12,7 @@ module GoldenRose
     def filter!
       raise GeneratingError, "Testable summaries not present." unless testable_summaries
       raise GeneratingError, "Tests not present." unless tests
-      @results = Results.new(test_details, items)
+      @results = Results.new(execution_details, items)
     end
 
     private
@@ -31,7 +31,7 @@ module GoldenRose
     end
 
     def items
-      compact_results(iterate_subtests(tests)).flatten.compact
+      @items ||= compact_results(iterate_subtests(tests)).flatten.compact
     end
 
     def compact_results(items)
@@ -45,10 +45,8 @@ module GoldenRose
       end
     end
 
-    def test_details
-      { 
-        name: testable_summaries.first['TestName']
-      }
+    def execution_details
+      ExecutionDetails.new(parsed_plist, items)
     end
 
     def testable_summaries

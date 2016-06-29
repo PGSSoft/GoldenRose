@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:charset => "UTF-8"}
-    %title Tests results
+    %title= @details.name
     %link{:href => "https://fonts.googleapis.com/css?family=Source+Sans+Pro&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
     :css
       body { font-family: 'Source Sans Pro', sans-serif; }
@@ -15,7 +15,7 @@
         text-align: left;
         margin: 73px 0 24px 0;
       }
-      h2 {
+      #details {
         color: #4e4e4e;
         margin: 0 0 60px 0;
         font-size: 18px;
@@ -73,9 +73,18 @@
   %body
     #container
       %h1
-        = @details[:name]
-      %h2
-        = @details[:info]
+        = @details.name
+      #details
+        #{@details.total_tests_count} tests run on
+        %strong
+          #{@details.model_name} iOS #{@details.os_version}
+        with
+        %strong
+          #{@details.passing_count} passing
+        and
+        %strong
+          #{@details.failures_count} failing
+        in #{@details.total_time} seconds
       #results
         %ol#collapsible
           - @items.each do |item|

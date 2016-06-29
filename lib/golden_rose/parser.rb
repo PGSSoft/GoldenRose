@@ -7,6 +7,8 @@ require "securerandom"
 
 module GoldenRose
   class Parser
+    FILE_NAME = "action_TestSummaries.plist"
+
     attr_accessor :parsed_plist, :folder_path
 
     def initialize(folder_path)
@@ -28,9 +30,7 @@ module GoldenRose
     private
 
     def open_directory
-      dir = Dir.open(folder_path)
-      file = dir.find { |file| test_summaries?(file) }
-      @plist_file_path = File.join(folder_path, file)
+      @plist_file_path = Dir.glob("#{folder_path}/**/#{FILE_NAME}").first
     end
 
     def open_zip
@@ -48,7 +48,7 @@ module GoldenRose
     end
 
     def test_summaries?(file_name)
-      file_name == "TestSummaries.plist"
+      file_name == FILE_NAME
     end
 
     def archive?

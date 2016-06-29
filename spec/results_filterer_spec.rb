@@ -23,7 +23,7 @@ describe GoldenRose::ResultsFilterer do
 
       it "sets correct results" do
         subject.filter!
-        expect(subject.results.details[:name]).to eq("Sample Test iPhone")
+        expect(subject.results.details.name).to eq("Sample Test iPhone")
         expect(subject.results.items).to eq(filtered_results)
       end
     end
