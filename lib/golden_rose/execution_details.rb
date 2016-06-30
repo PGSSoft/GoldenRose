@@ -9,13 +9,16 @@ module GoldenRose
       @parsed_plist["TestableSummaries"].first['TestName']
     end
 
-    def total_time
-      @items.reduce(0) do |time, item|
-        subtests_time = item[:subtests].reduce(0) do |time, item|
-          time + item[:time].to_f
-        end
-        time + subtests_time
-      end.round
+    def formatted_time
+      time = ""
+
+      hours = total_time / (60 * 60)
+      minutes = (total_time / 60) % 60
+      seconds = total_time % 60
+
+      time << "#{hours} hours, " if hours > 0
+      time << "#{minutes} minutes and " if minutes > 0
+      time << "#{seconds} seconds"
     end
 
     def failures_count
@@ -36,6 +39,15 @@ module GoldenRose
 
     def os_version
       @parsed_plist["RunDestination"]["TargetDevice"]["OperatingSystemVersion"]
+    end
+
+    def total_time
+      @items.reduce(0) do |time, item|
+        subtests_time = item[:subtests].reduce(0) do |time, item|
+          time + item[:time].to_f
+        end
+        time + subtests_time
+      end.round
     end
   end
 end

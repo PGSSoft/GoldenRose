@@ -84,7 +84,7 @@
         and
         %strong
           #{@details.failures_count} failing
-        in #{@details.total_time} seconds
+        in #{@details.formatted_time}
       #results
         %ol#collapsible
           - @items.each do |item|
