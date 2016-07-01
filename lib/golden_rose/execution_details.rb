@@ -10,15 +10,15 @@ module GoldenRose
     end
 
     def formatted_time
-      time = ""
-
       hours = total_time / (60 * 60)
       minutes = (total_time / 60) % 60
       seconds = total_time % 60
 
-      time << "#{hours} hours, " if hours > 0
-      time << "#{minutes} minutes and " if minutes > 0
-      time << "#{seconds} seconds"
+      "".tap do |time|
+        time << "#{pluralized(hours, 'hour')}, " if hours > 0
+        time << "#{pluralized(minutes, 'minute')} and " if minutes > 0
+        time << "#{pluralized(seconds, 'second')}"
+      end
     end
 
     def failures_count
@@ -48,6 +48,10 @@ module GoldenRose
         end
         time + subtests_time
       end.round
+    end
+
+    def pluralized(number, noun)
+      "#{number} #{noun}#{'s' if number != 1}"
     end
   end
 end
