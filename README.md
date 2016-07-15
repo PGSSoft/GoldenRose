@@ -12,9 +12,9 @@ sudo gem install golden_rose
 
 ## Quick start
 
-GoldenRose creates UI Automations tests results from "results" bundle created by the Xcode during execution.
+GoldenRose creates UI Automation tests report from "results" bundle created by the Xcode during execution.
 
-- Run UI Tests and save results bundle by using `-resultBundlePath`:
+- Run UI Tests and save results bundle using `-resultBundlePath`:
 
 ```bash
 xcodebuild -workspace MyProject.xcworkspace \
@@ -29,11 +29,11 @@ xcodebuild -workspace MyProject.xcworkspace \
 golden_rose generate MyApp.test_result
 ```
 
-This will generate report in html format in current directory.
+The tool will generate a report in html format in the current directory.
 
 ## Features
 
-- [x] UI Automations tests
+- [x] UI Automation tests
 - [x] Reading from ZIP files
 - [ ] Unit tests reports
 - [ ] Build logs
@@ -44,7 +44,7 @@ This will generate report in html format in current directory.
 
 ## Development
 
-After checking out the repo, run `./bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `./bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` to start an interactive prompt that, which will enable you to experiment.
 
 ## Contributing
 
