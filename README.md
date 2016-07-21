@@ -4,6 +4,8 @@
 
 A tool for generating reports from Xcode results bundle.
 
+<!-- One screenshot -->
+
 ## Installation
 
 ```bash
@@ -54,3 +56,10 @@ Bug reports and pull requests are welcome on GitHub at [https://github.com/PGSSo
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+## About
+The project maintained by [software development agency](https://pgs-soft.com) [PGS Software](https://pgs-soft.com)
+See our other [open-source projects](https://github.com/PGSSoft) or [contact us](https://www.pgs-soft.com/contact-us/) to grow your product.
+
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://github.com/PGSSoft/golden_rose)
+[![Twitter Follow](https://img.shields.io/twitter/follow/pgssoftware.svg?style=social&label=Follow)](https://twitter.com/pgssoftware)
