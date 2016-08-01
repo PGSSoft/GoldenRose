@@ -70,6 +70,13 @@
         letter-spacing: -0.28px;
         margin-right: 34px;
       }
+      #footer { 
+        color: #4e4e4e; 
+        font-size: 14px; 
+        margin-top: 40px;
+      }
+      .heart { color: #ff7726 }
+      #footer a { color: #ff7726; text-decoration: none }
   %body
     #container
       %h1
@@ -109,3 +116,8 @@
                             = failure[:message]
                           .failure-details
                             #{failure[:file_name]}:#{failure[:line_number]}
+      #footer
+        Made with 
+        %span.heart ❤ 
+        by 
+        %a(title="PGS Software" href="https://pgs-soft.com")PGS Software
