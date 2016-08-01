@@ -1,68 +1,17 @@
 # Used for setting single subtest details
-# Should be refactored to not inherit from Hash
 
 module GoldenRose
-  class SubtestItem < Hash
-    attr_accessor :subtest
+  class SubtestItem
+    attr_reader :name
 
-    def set_details
-      self[:name] = subtest["TestName"]
-      child_subtests ? set_parent_details : set_child_details
+    def initialize(source_subtest)
+      @name = source_subtest["TestName"]
     end
 
-    private
-
-    def set_parent_details
-      return if has_child_subtests?
-
-      self[:failures_count] = failed_subtests.size if failed_subtests?
-      self[:node_id] = node_id
-    end
-
-    def set_child_details
-      set_time
-      set_failures if subtest["FailureSummaries"]
-      self[:status] = subtest["TestStatus"].downcase
-    end
-
-    def set_time
-      last_time  = subtest["ActivitySummaries"].last["FinishTimeInterval"]
-      first_time = subtest["ActivitySummaries"].first["StartTimeInterval"]
-
-      return unless last_time && first_time
-
-      counted_time = last_time - first_time
-      self[:time]  = "#{counted_time.round(2)}s"
-    end
-
-    def set_failures
-      self[:failures] = subtest["FailureSummaries"].map do |failure|
-        {
-          message: failure["Message"],
-          file_name: failure["FileName"],
-          line_number: failure["LineNumber"]
-        }
+    def to_h
+      hashable_attributes.each_with_object({}) do |field, hash|
+        hash[field] = public_send(field) if public_send(field)
       end
-    end
-
-    def child_subtests
-      subtest["Subtests"]
-    end
-
-    def has_child_subtests?
-      child_subtests.any? { |subtest| subtest.include?("Subtests") }
-    end
-
-    def failed_subtests
-      self[:subtests].select { |subtest| subtest[:status] == "failure" }
-    end
-
-    def failed_subtests?
-      failed_subtests.size > 0
-    end
-
-    def node_id
-      "node_#{object_id}"
     end
   end
 end

@@ -18,22 +18,27 @@ module GoldenRose
     private
 
     def iterate_subtests(items)
-      items.map.with_index do |subtest, i|
+      items.map do |subtest|
         child_subtests = subtest["Subtests"]
         next if child_subtests && child_subtests.empty?
 
-        SubtestItem.new.tap do |item|
-          item.subtest = subtest
-          item[:subtests] = iterate_subtests(child_subtests) if child_subtests
-          item.set_details
+        if child_subtests
+          ParentItem.new(subtest).tap do |item|
+            item.subtests = iterate_subtests(child_subtests)
+          end.to_h
+        else
+          ChildItem.new(subtest).to_h
         end
       end.compact
     end
 
     def items
-      @items ||= compact_results(iterate_subtests(tests)).flatten.compact
+      @items ||= compact_results(iterate_subtests(tests))
     end
 
+    # This method simplify results structure,
+    # it sets only one level of nesting
+    # by leaving parents only with collection as child
     def compact_results(items)
       items.map do |subtest|
         subtests = subtest[:subtests]
@@ -42,7 +47,7 @@ module GoldenRose
         elsif subtests.size == 1
           compact_results(subtests)
         end
-      end
+      end.flatten.compact
     end
 
     def execution_details

@@ -1,5 +1,7 @@
 require "golden_rose/version"
 require "golden_rose/subtest_item"
+require "golden_rose/parent_item"
+require "golden_rose/child_item"
 require "golden_rose/parser"
 require "golden_rose/execution_details"
 require "golden_rose/results_filterer"

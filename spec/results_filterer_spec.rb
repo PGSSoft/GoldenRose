@@ -5,7 +5,7 @@ describe GoldenRose::ResultsFilterer do
 
   describe ".filter!" do
     before do
-      allow_any_instance_of(GoldenRose::SubtestItem).to receive(:node_id).and_return("node_123")
+      allow_any_instance_of(GoldenRose::ParentItem).to receive(:node_id).and_return("node_123")
     end
 
     context "with missing testable summaries" do
@@ -54,14 +54,14 @@ describe GoldenRose::ResultsFilterer do
                         {
                           "ActivitySummaries" => [
                             {
-                              "FinishTimeInterval" => 487599785.679846, 
-                              "StartTimeInterval" => 487599785.679387, 
+                              "FinishTimeInterval" => 85.679846, 
+                              "StartTimeInterval" => 85.679387, 
                               "Title" => "Start Test", 
                               "UUID" => "38D155C5-CCDD-4D9F-9D28-D838314EAD44"
                             },
                             {
-                              "FinishTimeInterval" => 487599793.587023, 
-                              "StartTimeInterval" => 487599793.586658, 
+                              "FinishTimeInterval" => 93.587023, 
+                              "StartTimeInterval" => 93.586658, 
                               "Title" => "Tear Down", 
                               "UUID" => "5A842EE6-CCDD-4D9F-9D28-D838314EAD44"
                             }
@@ -80,14 +80,14 @@ describe GoldenRose::ResultsFilterer do
                         {
                           "ActivitySummaries" => [
                             {
-                              "FinishTimeInterval" => 487599785.679846, 
-                              "StartTimeInterval" => 487599785.679387, 
+                              "FinishTimeInterval" => 85.679846, 
+                              "StartTimeInterval" => 85.679387, 
                               "Title" => "Start Test", 
                               "UUID" => "38D155C5-CCDD-4D9F-9D28-D838314EAD44"
                             },
                             {
-                              "FinishTimeInterval" => 487599793.587023, 
-                              "StartTimeInterval" => 487599793.586658, 
+                              "FinishTimeInterval" => 93.587023, 
+                              "StartTimeInterval" => 93.586658, 
                               "Title" => "Tear Down", 
                               "UUID" => "5A842EE6-CCDD-4D9F-9D28-D838314EAD44"
                             }
@@ -114,14 +114,14 @@ describe GoldenRose::ResultsFilterer do
                         {
                           "ActivitySummaries" => [
                             {
-                              "FinishTimeInterval" => 487599785.679846, 
-                              "StartTimeInterval" => 487599785.679387, 
+                              "FinishTimeInterval" => 85.679846, 
+                              "StartTimeInterval" => 85.679387, 
                               "Title" => "Start Test", 
                               "UUID" => "38D155C5-CCDD-4D9F-9D28-D838314EAD44"
                             },
                             {
-                              "FinishTimeInterval" => 487599793.587023, 
-                              "StartTimeInterval" => 487599793.586658, 
+                              "FinishTimeInterval" => 93.587023, 
+                              "StartTimeInterval" => 93.586658, 
                               "Title" => "Tear Down", 
                               "UUID" => "5A842EE6-CCDD-4D9F-9D28-D838314EAD44"
                             }
