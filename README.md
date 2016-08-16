@@ -1,6 +1,6 @@
 # GoldenRose
 
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/PGSSoft/golden_rose/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/PGSSoft/GoldenRose/blob/master/LICENSE)
 
 A tool for generating reports from Xcode results bundle.
 
@@ -50,7 +50,7 @@ After checking out the repo, run `./bin/setup` to install dependencies. Then, ru
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/PGSSoft/golden_rose](https://github.com/PGSSoft/golden_rose).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/PGSSoft/GoldenRose](https://github.com/PGSSoft/GoldenRose).
 
 
 ## License
@@ -61,5 +61,5 @@ The gem is available as open source under the terms of the [MIT License](http://
 The project maintained by [software development agency](https://pgs-soft.com) [PGS Software](https://pgs-soft.com).
 See our other [open-source projects](https://github.com/PGSSoft) or [contact us](https://www.pgs-soft.com/contact-us/) to develop your product.
 
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://github.com/PGSSoft/golden_rose)
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://github.com/PGSSoft/GoldenRose)
 [![Twitter Follow](https://img.shields.io/twitter/follow/pgssoftware.svg?style=social&label=Follow)](https://twitter.com/pgssoftware)
